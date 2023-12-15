@@ -17,33 +17,28 @@ class Participant
 {
     use IdentifiableEntity;
 
-    #[Column(length: 255)]
-    private ?string $role = null;
-
     #[ManyToOne]
     #[JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private ?User $User = null;
+    private ?UserEntity $User = null;
 
     #[ManyToOne(inversedBy: 'participants')]
     #[JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Event $Event = null;
+
+    #[Column(length: 255)]
+    private ?string $role = null;
 
     public function __construct()
     {
         $this->uuid = Uuid::v6();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
+    public function getUser(): ?UserEntity
     {
         return $this->User;
     }
 
-    public function setUser(?User $User): static
+    public function setUser(?UserEntity $User): static
     {
         $this->User = $User;
 

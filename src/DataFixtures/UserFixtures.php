@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
+use App\Entity\UserEntity;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -32,6 +32,6 @@ class UserFixtures extends Fixture
             UserFactory::createOne($user);
         }
 
-        UserFactory::createMany(10);
+        UserFactory::createMany(100);
     }
 }
