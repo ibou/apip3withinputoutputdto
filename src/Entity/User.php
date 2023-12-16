@@ -6,14 +6,12 @@ use App\Entity\Trait\IdentifiableEntity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
-#[Table(name: '`user`')]
 #[Entity(repositoryClass: UserRepository::class)]
-class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements EntityInterface, UserInterface, PasswordAuthenticatedUserInterface
 {
     use IdentifiableEntity;
 

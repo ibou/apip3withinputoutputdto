@@ -6,5 +6,5 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class ResetPasswordRequest
 {
     #[Assert\Email]
-    public $email;
+    public string $email;
 }

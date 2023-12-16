@@ -3,13 +3,14 @@
 namespace App\Dto\User\Response;
 
 use ApiPlatform\Metadata\ApiResource;
+use App\Dto\Response;
 use App\Dto\User\User;
 
 #[ApiResource(
     operations: [],
-    routePrefix: User::ROUTE_PREFIX,
+    routePrefix: User::ROUTE,
 )]
-class UserResponse
+class UserResponse implements Response
 {
     public function __construct(
         private string $uuid,

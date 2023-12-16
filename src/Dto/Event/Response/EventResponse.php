@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Dto\User\Response;
+namespace App\Dto\Event\Response;
 
 use ApiPlatform\Metadata\ApiResource;
+use App\Dto\Event\Event;
 use App\Dto\Response;
-use App\Dto\User\User;
 
 #[ApiResource(
     operations: [],
-    routePrefix: User::ROUTE,
+    routePrefix: Event::ROUTE,
 )]
-class UserCollectionResponse implements Response
+class EventResponse implements Response
 {
     public function __construct(
         private string $uuid,
-        private string $email,
+        private string $name,
     ){
         $this
             ->setId($uuid)
-            ->setEmail($email)
         ;
     }
 
@@ -32,7 +31,7 @@ class UserCollectionResponse implements Response
 
     /**
      * @param string $uuid
-     * @return UserCollectionResponse
+     * @return EventResponse
      */
     public function setId(string $uuid): static
     {
@@ -43,18 +42,18 @@ class UserCollectionResponse implements Response
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getName(): string
     {
-        return $this->email;
+        return $this->name;
     }
 
     /**
-     * @param string $email
-     * @return UserCollectionResponse
+     * @param string $name
+     * @return EventResponse
      */
-    public function setEmail(string $email): static
+    public function setName(string $name): static
     {
-        $this->email = $email;
+        $this->name = $name;
         return $this;
     }
 }

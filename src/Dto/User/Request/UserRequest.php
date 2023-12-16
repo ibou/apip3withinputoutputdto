@@ -4,8 +4,12 @@ namespace App\Dto\User\Request;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class UserRequest
+class UserRequest
 {
-    #[Assert\NotBlank(message: 'Uuid is required.')]
-    public string $uuid;
+    #[Assert\Email]
+    public string $email;
+
+    /**
+     * todo: Add all fields which are required for creating a user.
+     */
 }

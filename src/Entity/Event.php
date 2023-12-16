@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
 use App\Entity\Trait\IdentifiableEntity;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,9 +12,8 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Uid\Uuid;
 
-#[ApiResource]
 #[Entity(repositoryClass: EventRepository::class)]
-class Event
+final class Event implements EntityInterface
 {
     use IdentifiableEntity;
 
