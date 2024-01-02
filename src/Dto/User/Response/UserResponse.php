@@ -15,10 +15,12 @@ class UserResponse implements Response
     public function __construct(
         private string $uuid,
         private string $email,
+        private array $roles,
     ){
         $this
             ->setId($uuid)
             ->setEmail($email)
+            ->setRoles($roles)
         ;
     }
 
@@ -55,6 +57,24 @@ class UserResponse implements Response
     public function setEmail(string $email): static
     {
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     * @return UserResponse
+     */
+    public function setRoles(array $roles): UserResponse
+    {
+        $this->roles = $roles;
         return $this;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Dto\Event\Response;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Dto\Event\Event;
+use App\Dto\Participant\Response\ParticipantResponse;
 use App\Dto\Response;
 
 #[ApiResource(
@@ -18,6 +19,7 @@ class EventResponse implements Response
     ){
         $this
             ->setId($uuid)
+            ->setName($name)
         ;
     }
 

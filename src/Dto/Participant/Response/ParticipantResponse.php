@@ -3,10 +3,11 @@
 namespace App\Dto\Participant\Response;
 
 use ApiPlatform\Metadata\ApiResource;
+use App\Dto\Event\Response\EventResponse;
 use App\Dto\Participant\Participant;
 use App\Dto\Response;
-use App\Entity\Event;
-use App\Entity\User;
+use App\Dto\User\Response\UserResponse;
+
 
 #[ApiResource(
     operations: [],
@@ -17,12 +18,14 @@ class ParticipantResponse implements Response
     public function __construct(
         private string $uuid,
         private string $role,
-        private readonly User  $user,
-        private readonly Event $event,
+        private UserResponse $user,
+        private EventResponse $event,
     ){
         $this
             ->setId($uuid)
             ->setRole($role)
+            ->setUserResponse($user)
+            ->setEventResponse($event)
         ;
     }
 
@@ -63,15 +66,38 @@ class ParticipantResponse implements Response
     }
 
     /**
-     * @return string
+     * @return UserResponse
      */
-    public function getUserEmail(): string
+    public function getUserResponse(): UserResponse
     {
-        return $this->user->getEmail();
+        return $this->user;
     }
 
-    public function getEventName(): string
+    /**
+     * @param UserResponse $user
+     * @return ParticipantResponse
+     */
+    public function setUserResponse(UserResponse $user): static
     {
-        return $this->event->getName();
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return EventResponse
+     */
+    public function getEventResponse(): EventResponse
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param EventResponse $event
+     * @return ParticipantResponse
+     */
+    public function setEventResponse(EventResponse $event): static
+    {
+        $this->event = $event;
+        return $this;
     }
 }
