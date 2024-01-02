@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
 use App\Entity\Trait\IdentifiableEntity;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping\Column;
@@ -12,13 +11,9 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Uid\Uuid;
 
 #[Entity(repositoryClass: ParticipantRepository::class)]
-#[ApiResource]
-class Participant
+class Participant implements EntityInterface
 {
     use IdentifiableEntity;
-
-    #[Column(length: 255)]
-    private ?string $role = null;
 
     #[ManyToOne]
     #[JoinColumn(nullable: false, onDelete: 'CASCADE')]
@@ -28,14 +23,12 @@ class Participant
     #[JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Event $Event = null;
 
+    #[Column(length: 255)]
+    private ?string $role = null;
+
     public function __construct()
     {
         $this->uuid = Uuid::v6();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getUser(): ?User
