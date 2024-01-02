@@ -12,6 +12,7 @@ use ApiPlatform\State\ProviderInterface;
 use App\Mapper\Mapper;
 use ArrayIterator;
 use Doctrine\ORM\EntityNotFoundException;
+use Doctrine\ORM\Repository\Exception\InvalidMagicMethodCall;
 use ReflectionException;
 
 final class Provider implements ProviderInterface
@@ -25,6 +26,7 @@ final class Provider implements ProviderInterface
     /**
      * {@inheritDoc}
      * @throws EntityNotFoundException|ReflectionException
+     * @throws InvalidMagicMethodCall
      */
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
@@ -37,7 +39,7 @@ final class Provider implements ProviderInterface
             $data = [];
             foreach ($objects as $object) {
                 $data[] = ($object instanceof $entity)
-                    ? $this->mapper->toDto(output: $output, entity: $object)
+                    ? $this->mapper->toDto(output: $output['class'], entity: $object)
                     : throw new EntityNotFoundException($operation->getShortName() . ' does not exist');
             }
 
@@ -54,7 +56,7 @@ final class Provider implements ProviderInterface
         $object = $this->itemProvider->provide($operation, $uriVariables, $context);
 
         return $object instanceof $entity
-            ? $this->mapper->toDto(output: $output, entity: $object)
+            ? $this->mapper->toDto(output: $output['class'], entity: $object)
             : throw new EntityNotFoundException($operation->getShortName() . ' does not exist');
     }
 }

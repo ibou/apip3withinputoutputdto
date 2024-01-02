@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Uid\Uuid;
 
 #[Entity(repositoryClass: EventRepository::class)]
-final class Event implements EntityInterface
+class Event implements EntityInterface
 {
     use IdentifiableEntity;
 
